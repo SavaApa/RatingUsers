@@ -34,7 +34,6 @@ public class ReviewServiceImpl implements ReviewService {
         updateRating(toUser);
 
         return reviewMapper.toDto(entity);
-
     }
 
     private void updateRating(User user) {

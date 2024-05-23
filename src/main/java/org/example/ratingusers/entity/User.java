@@ -33,7 +33,7 @@ public class User {
     }
 
     public void updateRating() {
-        double totalRating = reviews.stream().mapToInt(Review::getRating).sum();
+        double totalRating = reviews.stream().mapToDouble(Review::getRating).sum();
         this.rating = totalRating / reviews.size();
     }
 }

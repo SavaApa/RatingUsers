@@ -14,3 +14,11 @@ CREATE TABLE IF NOT EXISTS reviews (
                                        FOREIGN KEY (from_user_id) REFERENCES users(user_id),
                                        FOREIGN KEY (to_user_id) REFERENCES users(user_id)
 );
+CREATE TABLE IF NOT EXISTS top_users (
+                           top_user_id BINARY(16) PRIMARY KEY,
+                           user_id BINARY(16),
+                           user_name VARCHAR(50),
+                           rating DOUBLE,
+                           FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
