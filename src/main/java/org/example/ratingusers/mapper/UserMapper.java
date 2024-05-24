@@ -1,22 +1,20 @@
 package org.example.ratingusers.mapper;
 
+import org.example.ratingusers.dto.UserAfterCreatingDto;
+import org.example.ratingusers.dto.UserCreateDto;
 import org.example.ratingusers.entity.User;
-import org.example.ratingusers.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
-import java.util.UUID;
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface UserMapper {
 
-@Component
-public class UserMapper {
-    private final UserRepository userRepository;
+    @Mapping(target = "username", source = "username")
+    @Mapping(target = "rating", source = "rating")
+    User toEntity(UserCreateDto userCreateDto);
 
-    @Autowired
-    public UserMapper(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public User map(UUID userId) {
-        return userRepository.findUserById(userId);
-    }
+    @Mapping(target = "user_id", ignore = true)
+    UserAfterCreatingDto toDto(User user);
 }

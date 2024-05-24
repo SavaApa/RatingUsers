@@ -1,7 +1,9 @@
 package org.example.ratingusers.service;
 
-import java.util.UUID;
+import org.example.ratingusers.dto.UserAfterCreatingDto;
+import org.example.ratingusers.dto.UserCreateDto;
+
 
 public interface UserService {
-    void deleteUserById(UUID id);
+    UserAfterCreatingDto createUser(UserCreateDto userCreateDto);
 }

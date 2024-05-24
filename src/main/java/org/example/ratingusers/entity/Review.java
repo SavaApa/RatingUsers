@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "review_id")
     private UUID id;
 

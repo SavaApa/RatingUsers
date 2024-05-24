@@ -9,7 +9,6 @@ import org.example.ratingusers.service.TopUserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class TopUserServiceImpl implements TopUserService {
 
         List<User> topUsers = allUsers.stream()
                 .limit(10)
-                .collect(Collectors.toList());
+                .toList();
 
         topUserRepository.deleteAll();
 

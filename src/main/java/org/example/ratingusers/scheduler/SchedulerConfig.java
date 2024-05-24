@@ -1,9 +1,9 @@
 package org.example.ratingusers.scheduler;
 
+import lombok.AllArgsConstructor;
 import org.example.ratingusers.entity.User;
 import org.example.ratingusers.repository.UserRepository;
 import org.example.ratingusers.service.TopUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,13 +12,12 @@ import java.util.List;
 
 @Configuration
 @EnableScheduling
+@AllArgsConstructor
 public class SchedulerConfig {
 
-    @Autowired
-    private TopUserService topUserService;
+    private final TopUserService topUserService;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Scheduled(cron = "0 0 0 * * *")
     public void updateTopUsers() {

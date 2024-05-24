@@ -41,7 +41,8 @@ public class TopUserServiceTest {
         topUserService.updateTopUsers();
 
         verify(topUserRepository, times(1)).deleteAll();
-        verify(topUserRepository, times(3)).save(new TopUser());
+        verify(topUserRepository, times(3)).save(any(TopUser.class));
+
     }
 }
 

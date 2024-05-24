@@ -1,32 +1,31 @@
 package org.example.ratingusers.service.impl;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.ratingusers.exception.UserDoesntExistException;
-import org.example.ratingusers.exception.errorMessage.ErrorMessage;
-import org.example.ratingusers.repository.ReviewRepository;
+import org.example.ratingusers.dto.UserAfterCreatingDto;
+import org.example.ratingusers.dto.UserCreateDto;
+import org.example.ratingusers.entity.User;
+import org.example.ratingusers.mapper.UserMapper;
 import org.example.ratingusers.repository.UserRepository;
 import org.example.ratingusers.service.UserService;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
 
+    private final UserMapper userMapper;
+
     @Override
-    @Transactional
-    public void deleteUserById(UUID id) {
-        if (!userRepository.existsById(id)) {
-            throw new UserDoesntExistException(ErrorMessage.NOT_EXIST);
-
+    public UserAfterCreatingDto createUser(UserCreateDto userCreateDto) {
+        User user = userRepository.findUserByUsername(userCreateDto.getUsername());
+        if (user != null) {
+            throw new RuntimeException("User with username already exists");
         }
-        reviewRepository.deleteByFromUserId(id);
 
-        userRepository.deleteById(id);
+        User entity = userMapper.toEntity(userCreateDto);
+        User userAfterCreation = userRepository.save(entity);
+        return userMapper.toDto(userAfterCreation);
     }
 }

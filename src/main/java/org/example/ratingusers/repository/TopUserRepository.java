@@ -7,7 +7,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface TopUserRepository extends JpaRepository<TopUser, UUID> {
-
     Optional<TopUser> findById(UUID id);
-
 }
