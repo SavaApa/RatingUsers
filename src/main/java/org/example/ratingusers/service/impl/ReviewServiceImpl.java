@@ -8,6 +8,7 @@ import org.example.ratingusers.dto.ReviewCreateDto;
 import org.example.ratingusers.entity.Review;
 import org.example.ratingusers.entity.User;
 import org.example.ratingusers.mapper.ReviewMapper;
+import org.example.ratingusers.repository.ReviewRepository;
 import org.example.ratingusers.repository.UserRepository;
 import org.example.ratingusers.service.ReviewService;
 import org.springframework.stereotype.Service;
